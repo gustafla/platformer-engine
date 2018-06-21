@@ -1,21 +1,28 @@
 extern crate sdl2;
+extern crate gl;
 
-use sdl2::pixels::Color;
 use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
+use sdl2::video::GLProfile;
 
 fn main() {
     let sdl_context = sdl2::init().unwrap();
     let video = sdl_context.video().unwrap();
+    let gl_attr = video.gl_attr();
+
+    gl_attr.set_context_profile(GLProfile::GLES);
+    gl_attr.set_context_version(2, 0);
+    gl_attr.set_multisample_buffers(0);
+    gl_attr.set_multisample_samples(0);
+
     let window = video.window("Plaformer game engine", 640, 480)
-        .position_centered().build().unwrap();
-    let mut canvas = window.into_canvas().build().unwrap();
+        .position_centered().opengl().build().unwrap();
+    let gl_context = window.gl_create_context().unwrap();
+    let gl = gl::load_with(|s| video.gl_get_proc_address(s) as *const std::os::raw::c_void);
 
-    println!("Using SDL renderer {}", canvas.info().name);
-
-    canvas.set_draw_color(Color::RGB(0, 0, 0));
-    canvas.clear();
-    canvas.present();
+    unsafe {
+        gl::ClearColor(1., 0., 0., 1.);
+    }
 
     let mut event_pump = sdl_context.event_pump().unwrap();
     'main_loop: loop {
@@ -28,5 +35,10 @@ fn main() {
                 _ => {}
             }
         }
+        unsafe {
+            gl::Clear(gl::COLOR_BUFFER_BIT);
+        }
+
+        window.gl_swap_window();
     }
 }
