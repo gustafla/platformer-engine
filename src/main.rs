@@ -3,14 +3,13 @@ extern crate gl;
 
 use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
-use sdl2::video::GLProfile;
 
 fn main() {
     let sdl_context = sdl2::init().unwrap();
     let video = sdl_context.video().unwrap();
     let gl_attr = video.gl_attr();
 
-    gl_attr.set_context_profile(GLProfile::GLES);
+    gl_attr.set_context_profile(sdl2::video::GLProfile::GLES);
     gl_attr.set_context_version(2, 0);
     gl_attr.set_multisample_buffers(0);
     gl_attr.set_multisample_samples(0);
