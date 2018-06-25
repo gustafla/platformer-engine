@@ -4,6 +4,9 @@ extern crate gl;
 use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
 
+mod renderer;
+use renderer::Renderer;
+
 fn main() {
     let sdl_context = sdl2::init().unwrap();
     let video = sdl_context.video().unwrap();
@@ -23,6 +26,8 @@ fn main() {
         gl::ClearColor(1., 0., 0., 1.);
     }
 
+    let renderer = Renderer::new();
+
     let mut event_pump = sdl_context.event_pump().unwrap();
     'main_loop: loop {
         for event in event_pump.poll_iter() {
@@ -37,6 +42,8 @@ fn main() {
         unsafe {
             gl::Clear(gl::COLOR_BUFFER_BIT);
         }
+
+        renderer.render();
 
         window.gl_swap_window();
     }
