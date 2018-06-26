@@ -1,10 +1,11 @@
 extern crate sdl2;
 extern crate gl;
 
+mod renderer;
+
+use std::os::raw::c_void;
 use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
-
-mod renderer;
 use renderer::Renderer;
 
 fn main() {
@@ -20,11 +21,9 @@ fn main() {
     let window = video.window("Plaformer game engine", 640, 480)
         .position_centered().opengl().build().unwrap();
     let gl_context = window.gl_create_context().unwrap();
-    let gl = gl::load_with(|s| video.gl_get_proc_address(s) as *const std::os::raw::c_void);
 
-    unsafe {
-        gl::ClearColor(1., 0., 0., 1.);
-    }
+    // load OpenGL functions (necessary on Winblows)
+    gl::load_with(|s| video.gl_get_proc_address(s) as *const c_void);
 
     let renderer = Renderer::new();
 
@@ -39,12 +38,7 @@ fn main() {
                 _ => {}
             }
         }
-        unsafe {
-            gl::Clear(gl::COLOR_BUFFER_BIT);
-        }
-
         renderer.render();
-
         window.gl_swap_window();
     }
 }

@@ -1,7 +1,7 @@
-use std::vec::Vec;
-
 mod sprite;
 mod mesh;
+
+use std::vec::Vec;
 use self::sprite::Sprite;
 use self::mesh::Mesh;
 
