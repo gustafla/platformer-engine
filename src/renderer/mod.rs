@@ -2,6 +2,7 @@ mod sprite;
 mod mesh;
 
 use std::vec::Vec;
+use gl::{ActiveTexture, TEXTURE0};
 use self::sprite::Sprite;
 use self::mesh::Mesh;
 
@@ -19,6 +20,8 @@ impl Renderer {
     }
 
     pub fn render(&self) {
-        // TODO implement
+        unsafe {
+            ActiveTexture(TEXTURE0);
+        }
     }
 }
