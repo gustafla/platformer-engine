@@ -2,8 +2,8 @@ use std::vec::Vec;
 
 mod sprite;
 mod mesh;
-use renderer::sprite::Sprite;
-use renderer::mesh::Mesh;
+use self::sprite::Sprite;
+use self::mesh::Mesh;
 
 pub struct Renderer {
     sprites: Vec<Sprite>,
