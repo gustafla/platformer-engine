@@ -1,5 +1,6 @@
 extern crate sdl2;
 extern crate gl;
+extern crate flif;
 
 mod renderer;
 
@@ -30,7 +31,7 @@ fn main() {
         gl::Viewport(0, 0, size.0, size.1);
     }
 
-    let renderer = Renderer::new();
+    let mut renderer = Renderer::new();
 
     let mut event_pump = sdl_context.event_pump().unwrap();
     'main_loop: loop {
