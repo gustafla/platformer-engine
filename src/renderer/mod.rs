@@ -2,8 +2,8 @@ mod sprite;
 mod mesh;
 mod resources;
 
+use super::gl;
 use std::vec::Vec;
-use gl::{ActiveTexture, BindTexture, TEXTURE0, TEXTURE_2D};
 use self::sprite::Sprite;
 use self::mesh::Mesh;
 use self::resources::Resources;
@@ -26,11 +26,11 @@ impl Renderer {
     pub fn render(&mut self) {
         self.resources.load_texture("test.flif");
         unsafe {
-            ActiveTexture(TEXTURE0);
+            gl::ActiveTexture(gl::TEXTURE0);
         }
         for sprite in &self.sprites {
             unsafe {
-                BindTexture(TEXTURE_2D, sprite.texture);
+                gl::BindTexture(gl::TEXTURE_2D, sprite.texture);
             }
         }
     }
