@@ -1,8 +1,9 @@
+extern crate gl;
+
 mod sprite;
 mod mesh;
 mod resources;
 
-use super::gl;
 use std::vec::Vec;
 use self::sprite::Sprite;
 use self::mesh::Mesh;
