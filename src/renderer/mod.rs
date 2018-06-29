@@ -25,7 +25,7 @@ impl Renderer {
     }
 
     pub fn render(&mut self) {
-        self.resources.load_texture("test.flif");
+        self.resources.load_texture("test.png");
         unsafe {
             gl::ActiveTexture(gl::TEXTURE0);
         }

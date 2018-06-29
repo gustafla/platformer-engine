@@ -6,4 +6,4 @@ authors = ["Lauri Gustafsson <luutifa@gmail.com>"]
 [dependencies]
 sdl2 = "^0"
 gl = "^0"
-flif = "0.2.0"
+png = "0.12.0"

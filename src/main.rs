@@ -1,6 +1,5 @@
 extern crate sdl2;
 extern crate gl;
-extern crate flif;
 
 mod renderer;
 
