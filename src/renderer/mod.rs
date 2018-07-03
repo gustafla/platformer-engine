@@ -25,7 +25,7 @@ impl Renderer {
     }
 
     pub fn render(&mut self) {
-        self.resources.load_texture("test.png");
+        self.resources.load_shader("test.vert").unwrap();
         unsafe {
             gl::ActiveTexture(gl::TEXTURE0);
         }
